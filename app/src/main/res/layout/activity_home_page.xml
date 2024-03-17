@@ -25,22 +25,22 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="132dp"
-        android:layout_height="108dp"
-        android:layout_marginTop="40dp"
-        android:text="สวัสดี"
+        android:layout_width="376dp"
+        android:layout_height="117dp"
+        android:layout_marginTop="20dp"
+        android:text="แอพพลิเคชั่น MAN VS FOOD จะสร้างประสบการณ์การทานอาหารที่ไม่ซ้ำซากและท้าทายผู้ใช้งานให้ได้สัมผัสกับความรู้เกี่ยวกับอาหารและเครื่องดื่มในการสำรวจอาหารที่น่าสนใจทั่วโลก"
         android:textColor="#000000"
-        android:textSize="34sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
         android:id="@+id/settings_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="settings"
         app:icon="@drawable/settings_icon2"
         app:iconPadding="30dp"
@@ -51,19 +51,20 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="180dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:srcCompat="@drawable/man_vs_food" />
 
     <Button
         android:id="@+id/ManVSFood_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text=" Man VS Food"
         app:icon="@drawable/man_vs_food"
         app:iconPadding="15dp"
@@ -76,18 +77,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="ปุ่มสำหรับระบบ CRUB ihko Man VS Food"
+        android:text="ปุ่มสำหรับระบบ CRUB ระบบ Man VS Food"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="TextView"
+        android:text="กดปุ่มด้านล่างเพื่อไปยังระบบ Settings"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,6 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
         android:text="HomePage"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
