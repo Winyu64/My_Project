@@ -1,18 +1,31 @@
 package th.ac.kku.cis.my_project;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Firebase;
+import com.google.firebase.database.FirebaseDatabase;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -30,7 +43,7 @@ public class Adapter extends FirebaseRecyclerAdapter<MainModel,Adapter.myViewHol
 
 
     @Override
-    protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull MainModel model) {
+    protected void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull MainModel model) {
         holder.name.setText(model.getName());
         holder.course.setText(model.getCourse());
         holder.email.setText(model.getEmail());
@@ -50,7 +63,73 @@ public class Adapter extends FirebaseRecyclerAdapter<MainModel,Adapter.myViewHol
                         .setExpanded(true, 1200)
                         .create();
 
+                View view = dialogPlus.getHolderView();
+
+                EditText name = view.findViewById(R.id.txtName);
+                EditText course = view.findViewById(R.id.txtCourse);
+                EditText email = view.findViewById(R.id.txtEmail);
+                EditText turl = view.findViewById(R.id.txtImageURL);
+
+                Button btnUpdate = view.findViewById(R.id.btnUpdate);
+
+                name.setText(model.getName());
+                course.setText(model.getCourse());
+                email.setText(model.getEmail());
+                turl.setText(model.getTurl());
+
                 dialogPlus.show();
+
+                btnUpdate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Map<String,Object> map = new HashMap<>();
+                        map.put("name",name.getText().toString());
+                        map.put("course",course.getText().toString());
+                        map.put("email",email.getText().toString());
+                        map.put("turl",turl.getText().toString());
+
+                        FirebaseDatabase.getInstance().getReference().child("teachers")
+                                .child(getRef(position).getKey()).updateChildren(map)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(holder.name.getContext(), "Data Updated", Toast.LENGTH_SHORT).show();
+                                        dialogPlus.dismiss();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(Exception e) {
+                                        Toast.makeText(holder.name.getContext(), "Error WhileUpdated", Toast.LENGTH_SHORT).show();
+                                        dialogPlus.dismiss();
+                                    }
+                                });
+                    }
+                });
+            }
+        });
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(holder.name.getContext());
+                builder.setTitle("Are you Sure?");
+                builder.setMessage("Deleted Data can't be Undo");
+
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseDatabase.getInstance().getReference().child("teachers")
+                                .child(getRef(position).getKey()).removeValue();
+                    }
+                });
+
+                builder.setNegativeButton("Cancrl", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(holder.name.getContext(), "Canelled", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.show();
             }
         });
     }
