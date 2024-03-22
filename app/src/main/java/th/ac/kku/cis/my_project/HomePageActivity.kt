@@ -27,6 +27,7 @@ class HomePageActivity : AppCompatActivity() {
             }
 
         ManVSFood_btn.setOnClickListener{
+//            val intent = Intent(this, ManVSFoodActivity::class.java);
             val intent = Intent(this, ManVSFoodActivity::class.java);
             startActivity(intent)
 
