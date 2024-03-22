@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/login_background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <TextView
         android:layout_width="421dp"
@@ -12,7 +12,7 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/login_background"
         android:gravity="center"
-        android:text="Add New Data"
+        android:text="Update Datails"
         android:textColor="#000000"
         android:textSize="25dp" />
 
@@ -22,14 +22,14 @@
         android:textSize="25dp"
         android:gravity="center"
         android:textColor="#000000"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:text="Name"/>
 
     <EditText
         android:id="@+id/txtName"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="35dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/frame"
@@ -43,14 +43,14 @@
         android:textSize="25dp"
         android:gravity="center"
         android:textColor="#000000"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="Course"/>
+        android:text="Details"/>
 
     <EditText
-        android:id="@+id/txtCourse"
+        android:id="@+id/txtDetails"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="155dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/frame"
@@ -64,14 +64,14 @@
         android:textSize="25dp"
         android:gravity="center"
         android:textColor="#000000"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="Email"/>
+        android:text="Location"/>
 
     <EditText
-        android:id="@+id/txtEmail"
+        android:id="@+id/txtLocation"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="35dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/frame"
@@ -85,14 +85,14 @@
         android:textSize="25dp"
         android:gravity="center"
         android:textColor="#000000"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="URL รูปภาพ"/>
+        android:text="URL รูปภาพอาหาร"/>
 
     <EditText
         android:id="@+id/txtImageURL"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="35dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/frame"
@@ -106,27 +106,12 @@
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"
-        android:text="Save Data"
+        android:text="Update"
         android:textSize="21dp"
         android:textAllCaps="false"
         android:background="@drawable/login_background"
         android:gravity="center"
-        android:id="@+id/btnAdd"/>
-
-    <Button
-        android:id="@+id/back_btn"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="10dp"
-        android:textSize="21dp"
-        android:text="Back"
-        android:textAllCaps="false"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:backgroundTint="#EF0000"
-        app:icon="@android:drawable/ic_menu_revert" />
+        android:id="@+id/btnUpdate"/>
 
 
 </LinearLayout>

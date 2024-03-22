@@ -27,7 +27,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Adapter extends FirebaseRecyclerAdapter<MainModel,Adapter.myViewHolder>{
+public class AdapterFood extends FirebaseRecyclerAdapter<MainFoodModel,AdapterFood.myViewHolder>{
 
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
@@ -35,19 +35,21 @@ public class Adapter extends FirebaseRecyclerAdapter<MainModel,Adapter.myViewHol
      *
      * @param options
      */
-    public Adapter(@NonNull FirebaseRecyclerOptions<MainModel> options) {
+    public AdapterFood(@NonNull FirebaseRecyclerOptions<MainFoodModel> options) {
         super(options);
     }
 
 
     @Override
-    protected void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull MainModel model) {
+    protected void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull MainFoodModel model) {
+
         holder.name.setText(model.getName());
-        holder.course.setText(model.getCourse());
-        holder.email.setText(model.getEmail());
+        holder.details.setText(model.getDetails());
+        holder.location.setText(model.getLocation());
+
 
         Glide.with(holder.img.getContext())
-                .load(model.getTurl())
+                .load(model.getFoodurl())
                 .placeholder(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark)
                 .circleCrop()
                 .error(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark_normal)
@@ -57,23 +59,23 @@ public class Adapter extends FirebaseRecyclerAdapter<MainModel,Adapter.myViewHol
             @Override
             public void onClick(View v) {
                 final DialogPlus dialogPlus = DialogPlus.newDialog(holder.img.getContext())
-                        .setContentHolder(new ViewHolder(R.layout.update_popup))
-                        .setExpanded(true, 1200)
+                        .setContentHolder(new ViewHolder(R.layout.update_popup_food))
+                        .setExpanded(true, 1495)
                         .create();
 
                 View view = dialogPlus.getHolderView();
 
                 EditText name = view.findViewById(R.id.txtName);
-                EditText course = view.findViewById(R.id.txtCourse);
-                EditText email = view.findViewById(R.id.txtEmail);
-                EditText turl = view.findViewById(R.id.txtImageURL);
+                EditText details = view.findViewById(R.id.txtDetails);
+                EditText location = view.findViewById(R.id.txtLocation);
+                EditText foodurl = view.findViewById(R.id.txtImageURL);
 
                 Button btnUpdate = view.findViewById(R.id.btnUpdate);
 
                 name.setText(model.getName());
-                course.setText(model.getCourse());
-                email.setText(model.getEmail());
-                turl.setText(model.getTurl());
+                details.setText(model.getDetails());
+                location.setText(model.getLocation());
+                foodurl.setText(model.getFoodurl());
 
                 dialogPlus.show();
 
@@ -82,11 +84,11 @@ public class Adapter extends FirebaseRecyclerAdapter<MainModel,Adapter.myViewHol
                     public void onClick(View v) {
                         Map<String,Object> map = new HashMap<>();
                         map.put("name",name.getText().toString());
-                        map.put("course",course.getText().toString());
-                        map.put("email",email.getText().toString());
-                        map.put("turl",turl.getText().toString());
+                        map.put("details",details.getText().toString());
+                        map.put("location",location.getText().toString());
+                        map.put("foodurl",foodurl.getText().toString());
 
-                        FirebaseDatabase.getInstance().getReference().child("teachers")
+                        FirebaseDatabase.getInstance().getReference().child("Food")
                                 .child(getRef(position).getKey()).updateChildren(map)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -104,6 +106,7 @@ public class Adapter extends FirebaseRecyclerAdapter<MainModel,Adapter.myViewHol
                                 });
                     }
                 });
+
             }
         });
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
@@ -111,12 +114,12 @@ public class Adapter extends FirebaseRecyclerAdapter<MainModel,Adapter.myViewHol
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(holder.name.getContext());
                 builder.setTitle("คุณแน่ใจไหม?");
-                builder.setMessage("ลบ");
+                builder.setMessage("ข้อมูลที่ถูกลบไม่สามารถกลับคืนได้!");
 
                 builder.setPositiveButton("ลบ", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        FirebaseDatabase.getInstance().getReference().child("teachers")
+                        FirebaseDatabase.getInstance().getReference().child("Food")
                                 .child(getRef(position).getKey()).removeValue();
                     }
                 });
@@ -135,13 +138,13 @@ public class Adapter extends FirebaseRecyclerAdapter<MainModel,Adapter.myViewHol
     @NonNull
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item,parent,false);
         return new myViewHolder(view);
     }
 
     class myViewHolder extends RecyclerView.ViewHolder{
         CircleImageView img;
-        TextView name,course,email;
+        TextView name,details,location;
 
         Button btnEdit, btnDelete;
 
@@ -150,8 +153,8 @@ public class Adapter extends FirebaseRecyclerAdapter<MainModel,Adapter.myViewHol
 
             img = (CircleImageView)itemView.findViewById(R.id.img1);
             name = (TextView)itemView.findViewById(R.id.nametext);
-            course = (TextView)itemView.findViewById(R.id.detailstext);
-            email = (TextView)itemView.findViewById(R.id.locationtext);
+            details = (TextView)itemView.findViewById(R.id.detailstext);
+            location = (TextView)itemView.findViewById(R.id.locationtext);
 
             btnEdit = (Button)itemView.findViewById(R.id.btnEdit);
             btnDelete = (Button)itemView.findViewById(R.id.btnDelete);

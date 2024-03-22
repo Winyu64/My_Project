@@ -13,16 +13,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.FirebaseDatabase
 
 
-class ManVSFoodActivity : AppCompatActivity() {
+class ManVSDrinkActivity : AppCompatActivity() {
 
     lateinit var back_btn : Button
     lateinit var recyclerView: RecyclerView
-    lateinit var adapter : AdapterFood
+    lateinit var adapter : Adapter
     lateinit var floatingActionButton : FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_man_vsfood)
+        setContentView(R.layout.activity_man_vsdrink)
 
         back_btn = findViewById(R.id.back_btn)
         recyclerView = findViewById(R.id.rv)
@@ -31,18 +31,18 @@ class ManVSFoodActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.rv)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val options = FirebaseRecyclerOptions.Builder<MainFoodModel>()
+        val options = FirebaseRecyclerOptions.Builder<MainModel>()
             .setQuery(
-                FirebaseDatabase.getInstance().getReference().child( "Food"),
-                MainFoodModel::class.java
+                FirebaseDatabase.getInstance().getReference().child( "teachers"),
+                MainModel::class.java
             )
             .build()
 
-        adapter = AdapterFood(options)
+        adapter = Adapter(options)
         recyclerView.adapter = adapter
 
         floatingActionButton.setOnClickListener{
-            val intent = Intent(this, Add_FoodActivity::class.java);
+            val intent = Intent(this, AddActivity::class.java);
             startActivity(intent)
         }
 
@@ -82,16 +82,16 @@ class ManVSFoodActivity : AppCompatActivity() {
     }
 
     private fun txtSearch(str: String) {
-        val options = FirebaseRecyclerOptions.Builder<MainFoodModel>()
+        val options = FirebaseRecyclerOptions.Builder<MainModel>()
             .setQuery(
-                FirebaseDatabase.getInstance().reference.child("Food").orderByChild("name")
+                FirebaseDatabase.getInstance().reference.child("teachers").orderByChild("name")
                     .startAfter(str).endAt(
                         "$str~"
                     ),
-                MainFoodModel::class.java
+                MainModel::class.java
             )
             .build()
-        adapter = AdapterFood(options)
+        adapter = Adapter(options)
         adapter.startListening()
         recyclerView.setAdapter(adapter)
     }

@@ -9,24 +9,23 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.FirebaseDatabase
 
-class AddActivity : AppCompatActivity() {
+class Add_FoodActivity : AppCompatActivity() {
 
     lateinit var name: EditText
-    lateinit var course: EditText
-    lateinit var email: EditText
-    lateinit var turl : EditText
+    lateinit var details: EditText
+    lateinit var location: EditText
+    lateinit var foodurl : EditText
     lateinit var btnAdd : Button
     lateinit var back_btn : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add)
+        setContentView(R.layout.activity_add_food)
 
         name = findViewById<View>(R.id.txtName) as EditText
-        course = findViewById<View>(R.id.txtCourse) as EditText
-        email = findViewById<View>(R.id.txtEmail) as EditText
-
-        turl = findViewById<View>(R.id.txtImageURL) as EditText
+        details = findViewById<View>(R.id.txtDetails) as EditText
+        location = findViewById<View>(R.id.txtLocation) as EditText
+        foodurl = findViewById<View>(R.id.txtImageURL) as EditText
         btnAdd = findViewById<View>(R.id.btnAdd) as Button
         back_btn = findViewById<View>(R.id.back_btn) as Button
 
@@ -37,31 +36,32 @@ class AddActivity : AppCompatActivity() {
             insertData()
             clearAll()
         }
-        back_btn.setOnClickListener {
-            val intent = Intent(this, ManVSDrinkActivity::class.java);
+        back_btn.setOnClickListener{
+            val intent = Intent(this, ManVSFoodActivity::class.java);
             startActivity(intent)
+
         }
     }
 
     private fun insertData() {
         val map = hashMapOf<String, Any>()
         map["name"] = name.text.toString()
-        map["course"] = course.text.toString()
-        map["email"] = email.text.toString()
-        map["turl"] = turl.text.toString()
+        map["details"] = details.text.toString()
+        map["location"] = location.text.toString()
+        map["foodurl"] = foodurl.text.toString()
 
-        FirebaseDatabase.getInstance().reference.child("teachers").push()
+        FirebaseDatabase.getInstance().reference.child("Food").push()
             .setValue(map)
             .addOnSuccessListener {
                 Toast.makeText(
-                    this@AddActivity,
+                    this@Add_FoodActivity,
                     "บันทึกข้อมูลสำเร็จ",
                     Toast.LENGTH_SHORT
                 ).show()
             }
             .addOnFailureListener {
                 Toast.makeText(
-                    this@AddActivity,
+                    this@Add_FoodActivity,
                     "Error เกิดข้อผิดพลาดขณะบันทึกข้อมูล",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -69,8 +69,8 @@ class AddActivity : AppCompatActivity() {
     }
     private fun clearAll() {
         name.setText("")
-        course.setText("")
-        email.setText("")
-        turl.setText("")
+        details.setText("")
+        location.setText("")
+        foodurl.setText("")
     }
 }
