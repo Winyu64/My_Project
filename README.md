@@ -46,12 +46,16 @@
 ![image](https://github.com/Winyu64/My_Project/assets/96216528/4014f2fb-f671-45d3-9e56-f2738411e03c)
 
 หน้า ManVSDrink
+![image](https://github.com/Winyu64/My_Project/assets/96216528/d7285177-c0c6-47b2-bb1c-4557d8500679)
 
 หน้า AddDrink
+![image](https://github.com/Winyu64/My_Project/assets/96216528/9fea1029-8c83-4adc-a370-a63fd103b50a)
 
 หน้า EditDrink
+![image](https://github.com/Winyu64/My_Project/assets/96216528/14b867f7-d879-4224-8575-5cc6fc7a2f43)
 
 หน้า DeleteDrink
+![image](https://github.com/Winyu64/My_Project/assets/96216528/f24e9184-d10c-497d-b23a-0dd88923e78f)
 
 หน้า Settings
 ![image](https://github.com/Winyu64/My_Project/assets/96216528/5705dc0a-a321-4065-a936-49d9bf376ef1)
