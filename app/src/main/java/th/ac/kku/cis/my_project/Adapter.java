@@ -111,7 +111,7 @@ public class Adapter extends FirebaseRecyclerAdapter<MainModel,Adapter.myViewHol
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(holder.name.getContext());
                 builder.setTitle("คุณแน่ใจไหม?");
-                builder.setMessage("ลบ");
+                builder.setMessage("ข้อมูลที่ถูกลบไม่สามารถกลับคืนได้");
 
                 builder.setPositiveButton("ลบ", new DialogInterface.OnClickListener() {
                     @Override
